@@ -62,6 +62,13 @@ let hasStartedShowcase = false;
 let spawnedObject: mod.Object | null = null;
 let activeViewer: mod.Player | null = null;
 
+export async function OnGameModeStarted(): Promise<void> {
+    mod.EnableAllPlayerDeploy(true);
+    mod.SetSpawnMode(mod.SpawnModes.AutoSpawn);
+    await mod.Wait(1);
+    mod.DeployAllPlayers();
+}
+
 export async function OnPlayerDeployed(eventPlayer: mod.Player): Promise<void> {
     if (hasStartedShowcase) {
         setPlayerToFixedCamera(eventPlayer);
